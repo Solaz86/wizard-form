@@ -1,0 +1,14 @@
+wizard_form.wizardfirst_form:
+  path: '/new-user-1'
+  defaults:
+    _form: '\Drupal\wizard_form\Form\WizardfirstForm'
+    _title: 'First Step'
+  requirements:
+    _access: 'TRUE'
+wizard_form.secondstep_form:
+  path: '/new-user-2'
+  defaults:
+    _form: '\Drupal\wizard_form\Form\WizardSecondForm'
+    _title: 'Second Step'
+  requirements:
+    _access: 'TRUE'

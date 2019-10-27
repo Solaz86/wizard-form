@@ -1,0 +1,13 @@
+{
+    "name": "wizard_form",
+    "type": "drupal-module",
+    "description": "Wizard form to create users",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/wizard_form",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/wizard_form",
+        "source": "http://cgit.drupalcode.org/wizard_form"
+    }
+}
