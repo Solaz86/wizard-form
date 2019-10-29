@@ -235,7 +235,7 @@ class WizardUserForm extends WizardFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#required' => TRUE,
-      '#default_value' => $this->store->get('first_name'),
+      '#default_value' => $this->tempStore->get('first_name'),
     ];
 
     $form['step']['last_name'] = [
@@ -244,7 +244,7 @@ class WizardUserForm extends WizardFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#required' => TRUE,
-      '#default_value' => $this->store->get('last_name'),
+      '#default_value' => $this->tempStore->get('last_name'),
     ];
 
     $form['step']['gender'] = [
@@ -256,7 +256,7 @@ class WizardUserForm extends WizardFormBase {
         'N' => 'Neutral',
       ],
       '#required' => TRUE,
-      '#default_value' => $this->store->get('gender'),
+      '#default_value' => $this->tempStore->get('gender'),
     ];
 
     $form['step']['birthdate'] = [
@@ -265,7 +265,7 @@ class WizardUserForm extends WizardFormBase {
       '#format' => 'm/d/Y',
       '#description' => $this->t('i.e. 09/06/2016'),
       '#required' => TRUE,
-      '#default_value' => $this->store->get('birthdate'),
+      '#default_value' => $this->tempStore->get('birthdate'),
     ];
 
     return $form;
@@ -310,7 +310,7 @@ class WizardUserForm extends WizardFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#required' => TRUE,
-      '#default_value' => $this->store->get('city'),
+      '#default_value' => $this->tempStore->get('city'),
     ];
 
     $form['step']['phone_number'] = [
@@ -318,7 +318,7 @@ class WizardUserForm extends WizardFormBase {
       '#title' => $this->t('Phone number'),
       '#maxlength' => 64,
       '#size' => 64,
-      '#default_value' => $this->store->get('phone_number'),
+      '#default_value' => $this->tempStore->get('phone_number'),
     ];
 
     $form['step']['address'] = [
@@ -326,7 +326,7 @@ class WizardUserForm extends WizardFormBase {
       '#title' => $this->t('Address'),
       '#maxlength' => 64,
       '#size' => 64,
-      '#default_value' => $this->store->get('address'),
+      '#default_value' => $this->tempStore->get('address'),
     ];
 
     return $form;
@@ -356,13 +356,13 @@ class WizardUserForm extends WizardFormBase {
     ];
 
     $message = $this->t('Do you want to create the user with the following data?. Click finish to confirm.');
-    $message .= "<br><b>First name: </b>{$this->store->get('first_name')}";
-    $message .= "<br><b>Last name: </b>{$this->store->get('last_name')}";
-    $message .= "<br><b>Gender: </b>{$this->store->get('gender')}";
-    $message .= "<br><b>Date of birth: </b>{$this->store->get('birthdate')}";
-    $message .= "<br><b>City: </b>{$this->store->get('city')}";
-    $message .= "<br><b>Phone number: </b>{$this->store->get('phone_number')}";
-    $message .= "<br><b>Address: </b>{$this->store->get('address')}<br>";
+    $message .= "<br><b>First name: </b>{$this->tempStore->get('first_name')}";
+    $message .= "<br><b>Last name: </b>{$this->tempStore->get('last_name')}";
+    $message .= "<br><b>Gender: </b>{$this->tempStore->get('gender')}";
+    $message .= "<br><b>Date of birth: </b>{$this->tempStore->get('birthdate')}";
+    $message .= "<br><b>City: </b>{$this->tempStore->get('city')}";
+    $message .= "<br><b>Phone number: </b>{$this->tempStore->get('phone_number')}";
+    $message .= "<br><b>Address: </b>{$this->tempStore->get('address')}<br>";
 
     $form['step']['message'] = [
       '#markup' => $message,
