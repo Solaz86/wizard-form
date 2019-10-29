@@ -1,7 +1,7 @@
 {
     "name": "wizard_form",
     "type": "drupal-module",
-    "description": "Wizard form to create users",
+    "description": "Wizard type form to create users",
     "keywords": [
     ],
     "homepage": "https://www.drupal.org/project/wizard_form",
