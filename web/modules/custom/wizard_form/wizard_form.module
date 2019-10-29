@@ -25,13 +25,13 @@ function wizard_form_help($route_name, RouteMatchInterface $route_match) {
 
 
 /**
- * Implements hook_theme_suggestions_alter().
+ * Implements hook_theme().
  */
-function wizard_form_theme_suggestions_alter(array &$suggestions, array $variables, $hook)
-{
-  $element = $variables['element'];
-
-  if (isset($element['#attributes']['data-twig-suggestion'])) {
-    $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
-  }
+function wizard_form_theme($existing, $type, $theme, $path) {
+  return [
+    'wizard_form_result' => [
+      'variables' => ['message' => NULL],
+    ],
+  ];
 }
+

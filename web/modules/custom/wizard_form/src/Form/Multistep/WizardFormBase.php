@@ -93,4 +93,28 @@ abstract class WizardFormBase extends FormBase {
     $this->tempStore->set($key, $value);
   }
 
+  protected function getDataTheme() {
+
+    $message = 'User data. Click finish to proceed';
+
+    $user = [
+        'first_name' => $this->tempStore->get('first_name'),
+        'last_name' => $this->tempStore->get('last_name'),
+        'gender' => $this->tempStore->get('gender'),
+        'birthday' => $this->tempStore->get('birthdate'),
+        'city' => $this->tempStore->get('city'),
+        'phone_number' => $this->tempStore->get('phone_number'),
+        'address' => $this->tempStore->get('address'),
+      ];
+
+
+    $build = [
+      '#theme' => 'wizard_form_result',
+      '#message' => $message,
+//      'user_result' => $user,
+    ];
+
+    return $build;
+  }
+
 }

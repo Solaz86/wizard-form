@@ -2,7 +2,9 @@
 
 namespace Drupal\wizard_form\Form;
 
-use Drupal\Core\Form\FormBase;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\wizard_form\Form\Multistep\WizardFormBase;
 
@@ -29,8 +31,7 @@ class SimpleForm extends WizardFormBase {
       '#markup' => '<div id="messages-wrapper"></div>',
     ];
 
-    $step = ($this->tempStore->get('step') ?: 1);
-
+    $step = ($form_state->get('step') ?: 1);
 
     $previous = [
       '#type' => 'submit',
@@ -127,23 +128,14 @@ class SimpleForm extends WizardFormBase {
       $form['actions']['step_next'] = $next;
     } elseif ($step === 3) {
 
-
       $form['#attributes']['class'][] = 'webform-client-form';
-      $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'contact_submit';
 
+      $result = $this->getDataTheme();
 
-//      $message = $this->t('Do you want to create the user with the following data?. Click finish to confirm.');
-//      $message .= "<br><b>First name: </b>{$this->store->get('first_name')}";
-//      $message .= "<br><b>Last name: </b>{$this->store->get('last_name')}";
-//      $message .= "<br><b>Gender: </b>{$this->store->get('gender')}";
-//      $message .= "<br><b>Date of birth: </b>{$this->store->get('birthdate')}";
-//      $message .= "<br><b>City: </b>{$this->store->get('city')}";
-//      $message .= "<br><b>Phone number: </b>{$this->store->get('phone_number')}";
-//      $message .= "<br><b>Address: </b>{$this->store->get('address')}<br>";
-//
-//      $form['message'] = [
-//        '#markup' => $message,
-//      ];
+      \Drupal::service('renderer')->render($result);
+
+//      $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'contact_submit';
+
     }
 
     return $form;
@@ -166,19 +158,12 @@ class SimpleForm extends WizardFormBase {
    */
   public function nextStep(array &$form, FormStateInterface $form_state) {
     $step = ($form_state->get('step') ?: 1);
-    $step === 1 ? $this->betwinstep($form, $form_state, $step) : $this->nextStepTwoToThree($form, $form_state, $step);
+    $step === 1 ? $this->betwinstep($form, $form_state, 2) : $this->betwinstep($form, $form_state, 3);
   }
 
   public function prevStep(array &$form, FormStateInterface $form_state) {
     $step = ($form_state->get('step') ?: 1);
-    $step === 2 ? $this->betwinstep($form, $form_state, $step) : $this->nextStepTwoToThree($form, $form_state, $step);
-
-
-    if ($step === 2 ) {
-      $this->prevStepTwoToOne($form, $form_state);
-    } elseif ($step === 3) {
-        $this->prevStepThreeToTwo($form, $form_state);
-    }
+    $step === 2 ? $this->betwinstep($form, $form_state, 1) : $this->betwinstep($form, $form_state, 2);
   }
 
   /**
@@ -187,10 +172,41 @@ class SimpleForm extends WizardFormBase {
    * @param int $step
    */
   public function betwinstep(array &$form, FormStateInterface $form_state, $step) {
-    $this->saveProcessForm($form, $form_state);
+    foreach ($form_state->getValues() as $key => $value) {
+      $this->saveTempStore($key, $form_state->getValue($key));
+    }
     $form_state->set('step', $step);
     $form_state->setRebuild();
   }
+
+
+  /**
+   * @param array $form
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *
+   * @return mixed
+   */
+  public function stepCallback(array &$form, FormStateInterface $form_state) {
+    $ajax_response = new AjaxResponse();
+    $messages = $this->messenger->deleteAll();
+
+    $ajax_response->addCommand(new ReplaceCommand('#new-user-form-wrapper', $form));
+
+    if (!empty($messages)) {
+      $messages = [
+        '#theme' => 'status_messages',
+        '#message_list' => $messages,
+      ];
+      $ajax_response->addCommand(new HtmlCommand('#messages-wrapper', $messages));
+    }
+    else {
+      // Remove messages.
+      $ajax_response->addCommand(new HtmlCommand('#messages-wrapper', ''));
+    }
+
+    return $ajax_response;
+  }
+
 
 
 }
