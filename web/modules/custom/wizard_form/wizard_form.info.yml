@@ -1,5 +1,0 @@
-name: 'Wizard form'
-type: module
-description: 'Wizard form to create users'
-core: 8.x
-package: 'Wizard form'

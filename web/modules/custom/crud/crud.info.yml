@@ -1,0 +1,5 @@
+name: 'crud'
+type: module
+description: 'Development and implementation of the crud'
+core: 8.x
+package: 'Custom'

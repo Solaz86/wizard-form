@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function crud_schema() {
+  $schema['crud_user'] = array(
+    'description' => 'User data',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The user ID.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The user name',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}

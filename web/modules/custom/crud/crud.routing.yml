@@ -1,0 +1,24 @@
+crud.register_form:
+  path: '/crud/register'
+  defaults:
+    _form: '\Drupal\crud\Form\RegisterForm'
+    _title: 'RegisterForm'
+  requirements:
+    _permission: 'access register'
+
+crud.crud_controller_load:
+  path: 'crud/load'
+  defaults:
+    _controller: '\Drupal\crud\Controller\CrudController::load'
+    _title: 'load'
+  requirements:
+    _permission: 'access load'
+
+crud.crud_controller_import:
+  path: 'crud/import'
+  defaults:
+    _controller: '\Drupal\crud\Controller\CrudController::import'
+    _title: 'import'
+  requirements:
+    _permission: 'access import'
+

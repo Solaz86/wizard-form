@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains crud.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function crud_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the crud module.
+    case 'help.page.crud':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Development and implementation of the crud') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function crud_theme($existing, $type, $theme, $path) {
+  return [
+    'crud' => [
+      'variables' => [
+        'users' => NULL
+      ]
+    ],
+  ];
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function crud_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'crud/crud_validate';
+}
+

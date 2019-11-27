@@ -1,0 +1,17 @@
+jquery.validate:
+  remote: https://jqueryvalidation.org/
+  license:
+    name: MIT
+    url: https://github.com/jquery-validation/jquery-validation/blob/master/LICENSE.md
+    gpl-compatible: true
+  js:
+    /libraries/jquery-validation/dist/jquery.validate.js: {}
+
+crud_validate:
+  js:
+    js/crud-validate.js: {}
+  dependencies:
+    - 'core/drupal'
+    - 'core/drupalSettings'
+    - 'crud/jquery.validate'
+    - 'core/drupal.dialog.ajax'

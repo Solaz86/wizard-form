@@ -1,0 +1,13 @@
+{
+    "name": "crud",
+    "type": "drupal-module",
+    "description": "Development and implementation of the crud",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/crud",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/crud",
+        "source": "http://cgit.drupalcode.org/crud",
+    },
+}

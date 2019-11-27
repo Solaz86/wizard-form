@@ -1,0 +1,14 @@
+access register:
+  title: 'access to register users'
+  description: 'A custom permission to access to register users.'
+  restrict access: TRUE
+
+access load:
+  title: 'access to load users'
+  description: 'A custom permission to access to load users.'
+  restrict access: TRUE
+
+access import:
+  title: 'access to import users'
+  description: 'A custom permission to access to import users.'
+  restrict access: TRUE
