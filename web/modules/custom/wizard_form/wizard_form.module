@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Contains wizard_form.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wizard_form_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wizard_form module.
+    case 'help.page.wizard_form':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Multi-step form for create user') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function wizard_form_theme_suggestions_alter(array &$suggestions, array $variables, $hook)
+{
+  $element = $variables['element'];
+
+  if (isset($element['#attributes']['data-twig-suggestion'])) {
+    $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+  }
+}
