@@ -91,7 +91,7 @@ class RegisterForm extends FormBase {
     ];
 
     $form['actions'] = [
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => $this->t('Submit'),
 
       '#ajax' => [
