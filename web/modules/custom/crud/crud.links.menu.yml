@@ -1,0 +1,11 @@
+crud.register_form:
+  title: Register user
+  route_name: crud.register_form
+
+crud.crud_controller_load:
+  title: Load users
+  route_name: crud.crud_controller_load
+
+crud.import_form:
+  title: Import CSV
+  route_name: crud.import_form
