@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Form\FormBase;
 use Drupal\crud\Form\RegisterForm;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -66,7 +67,6 @@ class CrudController extends ControllerBase {
       $users[] = $record;
     }
 
-
     return [
       '#theme' => 'crud',
       '#users' => $users
@@ -75,15 +75,30 @@ class CrudController extends ControllerBase {
   }
 
   /**
-   * @return array
-   *   Return read string.
+   * @return \Symfony\Component\HttpFoundation\Response
+   *   Return response.
    */
-  public function import() {
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Implement method: import')
-    ];
+  public function exportUsers() {
+    $rows = array();
+    $select = \Drupal::service('database')
+      ->select('crud_user', 'f')
+      ->fields('f')
+      ->execute();
 
+    // Get all the results.
+    $results = $select->fetchAll();
+
+    foreach ($results as $result) {
+      $rows[] = implode(',', (array) $result);
+    }
+
+    $content = implode("\n", $rows);
+    $response = new Response($content);
+    $response->headers->set('Content-Type', 'text/csv');
+    $response->headers->set('Content-Disposition','attachment; filename="users.csv"');
+
+    return $response;
   }
+
 
 }

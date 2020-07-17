@@ -14,11 +14,18 @@ crud.crud_controller_load:
   requirements:
     _permission: 'access load'
 
-crud.crud_controller_import:
-  path: 'crud/import'
+mymodule.downloadCustomers:
+  path: '/crud/load/export'
   defaults:
-    _controller: '\Drupal\crud\Controller\CrudController::import'
-    _title: 'import'
+    _title: 'Download Users'
+    _controller: '\Drupal\crud\Controller\CrudController::exportUsers'
   requirements:
-    _permission: 'access import'
+    _permission: 'access content'
 
+crud.import_form:
+  path: '/crud/import'
+  defaults:
+    _form: '\Drupal\crud\Form\ImportForm'
+    _title: 'ImportForm'
+  requirements:
+    _access: 'TRUE'

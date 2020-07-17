@@ -8,6 +8,6 @@
     "minimum-stability": "dev",
     "support": {
         "issues": "https://www.drupal.org/project/issues/crud",
-        "source": "http://cgit.drupalcode.org/crud",
-    },
+        "source": "http://cgit.drupalcode.org/crud"
+    }
 }
